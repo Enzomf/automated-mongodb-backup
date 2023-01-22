@@ -1,25 +1,37 @@
-Projeto realizado para que usuarios do mongodb possam realizar backups de forma automatizada, lembrando que é necessario ter as tools do mongodb instaladas: 
+# Projeto realizado para que usuarios do mongodb possam realizar backups de forma automatizada, lembrando que é necessario ter as tools do mongodb instaladas: 
 
-*mongodump:* realização do backup;
+### mongodump:
+*utilizado para a realização do backup*
+
 algumas das possiveis flags para esse comando são: 
+
 *--db:* especifica o nome do banco dados a ser realiza o backup
-        *ex:* --db=exemplo
+
+*ex:* --db=exemplo
+
 *--archive:* especifica o caminho de saida do backup, sendo possivel passar o nome do   aquivo;
+
 *ex:* --archive=backups/<nome do arquivo>.<extenção do arquivo>
 
 *--gzip:* gera o backup de no fomato .gz (comprimido)
+
 *--username:* usuario do banco de dados (se houver)
+
 *ex:* --username=admin
+
 *--password:* senha do banco de dados (se houver)
+
 *ex:* --password=admin
+
 *--authenticationDatabase:* banco de dados utilizado para realizar a autenticação (se houver) 
+
 *--uri:* url para conexão com o banco de dados
+
 *ex:* --uri="mongodb://mongodb0.example.com:27017"
 
 para mais informações consultar a [documentação oficial](https://www.mongodb.com/docs/database-tools/mongodump/)
 
-mongorestore: recuperação do banco de dados;
-    comando utilizado: 
+## Para recuperar o banco de dados utilize o seguinte comando:
         
         mongorestore --archive="2023-01-22.gz" --gzip
 

@@ -5,8 +5,6 @@ import moment from 'moment'
 config();
 const { DB_USER, DB_PASSWORD, DB_NAME, DB_AUTH, OUT_PATH } = process.env;
 
-//mongorestore --archive="2023-01-22.gz" --gzip
-
 function backup() {
     const timeStamp = moment().format("YYYY-MM-DD");
     const mongoDump =
