@@ -1,23 +1,27 @@
-import { exec } from "node:child_process";
-import { schedule } from "node-cron";
 import { config } from "dotenv";
-import moment from 'moment'
 config();
+import { exec } from "node:child_process";
+import { sendEmail } from "./email.js";
+import { schedule } from "node-cron";
+import moment from 'moment';
+
+
 const { DB_USER, DB_PASSWORD, DB_NAME, DB_AUTH, OUT_PATH } = process.env;
 
 function backup() {
-    const timeStamp = moment().format("YYYY-MM-DD");
-    const mongoDump =
-    `mongodump --db=${DB_NAME} --archive=${OUT_PATH}/${timeStamp}.gz --gzip`;
-
-    exec(mongoDump, (error) => {
+    const fileName = `${moment().format("YYYY-MM-DD")}.gz`;
+    const command = `mongodump --db=${DB_NAME} --archive=${OUT_PATH}/${fileName} --gzip`;
+    
+    exec(command, (error) => {
         if (error) {
             console.log(error)
             return
         }
 
         console.log('success backup');
+
+        sendEmail(fileName)
     })
 }
 
-schedule('1 0 * * *', ()=> backup())
+schedule('1 0 * * *', () => backup())
